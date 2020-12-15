@@ -5,9 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    shopData:{
+      shopName:'极岛面栈'
+    },
+    navIndex: 0,
+    navList:[
+      {label:'热门菜品'},
+      {label:'炒饭 炒面'},
+      {label:'海鲜汤面'},
+      {label:'家常小炒'},
+      {label:'荤素搭配'},
+      {label:'活鱼生鲜'},
+      {label:'海鲜贝类'},
+      {label:'饮料'},
+      {label:'米饭'},
+      {label:'餐具'}
+    ]
   },
 
+  clickNav: function (e) {
+    let index = e.currentTarget.dataset['index']
+    this.setData({
+      navIndex : index
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -63,4 +84,5 @@ Page({
   onShareAppMessage: function () {
 
   }
+  
 })
