@@ -9,25 +9,69 @@ Page({
       shopName:'极岛面栈'
     },
     navIndex: 0,
-    navList:[
-      {label:'热门菜品'},
-      {label:'炒饭 炒面'},
-      {label:'海鲜汤面'},
-      {label:'家常小炒'},
-      {label:'荤素搭配'},
-      {label:'活鱼生鲜'},
-      {label:'海鲜贝类'},
-      {label:'饮料'},
-      {label:'米饭'},
-      {label:'餐具'}
-    ]
+    navList: [
+      {id: 0,label:'今日折扣'},
+      {id: 1,label:'热门菜品'},
+      {id: 2,label:'炒饭炒面'},
+      {id: 3,label:'海鲜汤面'},
+      {id: 4,label:'家常小炒'},
+      {id: 5,label:'荤素搭配'},
+      {id: 6,label:'活鱼生鲜'},
+      {id: 7,label:'海鲜贝类'},
+      {id: 8,label:'饮料'},
+      {id: 9,label:'米饭'},
+      {id: 10,label:'餐具'}
+    ],
+    orderList: [
+      [
+        {id:0, price:12,num:1,imageURL: '/src/image/hxcf.jfif'},
+        {id:1, price:12,num:1,imageURL: '/src/image/pgcf.jfif'},
+        {id:2, price:12,num:1,imageURL: '/src/image/ng.jpg'},
+        {id:3, price:12,num:1,imageURL: '/src/image/hsng.jfif'}
+      ],
+      [
+        {id:0, price:12,num:1,imageURL: '/src/image/ggbc.jpg'},
+        {id:1, price:12,num:1,imageURL: '/src/image/tds.jpg'},
+        {id:2, price:12,num:1,imageURL: '/src/image/cbyr.jpg'}
+      ],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    orderNum: 12,
+    priceTotal: 0,
+    navIndex:0,
+    orderNull: false
   },
-
-  clickNav: function (e) {
-    let index = e.currentTarget.dataset['index']
+  scrollBottom: function () {
+    console.log("到底部了")
+  },
+  changeMenu: function (event) {
+    if (this.data.orderList[event.detail].length > 0) {
+      this.setData({
+        orderNull:false
+     })
+    }else {
+      console.log("此页暂无")
+      console.log(this.data.orderList[event.detail])
+      this.setData({
+        orderNull:true
+     })
+    }
     this.setData({
-      navIndex : index
-    })
+      navIndex:event.detail
+   })
+  },
+  clickNav: function (event) {
+  },
+  selected: function(){
+    console.log('选好了')
   },
   /**
    * 生命周期函数--监听页面加载

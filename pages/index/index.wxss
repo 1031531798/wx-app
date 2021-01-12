@@ -18,13 +18,8 @@
 
 .usermotto {
   margin-top: 200px;
+  width: 60%;
 }
 .usermotto-btn{
-  border: 0px;
-  border-radius: 20px;
-  font-family: inherit;
-  letter-spacing:20rpx;
-  font-size: 13px;
-  color: white;
-  background-color: #FF6A00 !important;
+  width: 100%;
 }

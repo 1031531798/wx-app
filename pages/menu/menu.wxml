@@ -4,11 +4,39 @@
     <image class="header-img" src="/src/image/headimg.jfif" mode="aspectFill"></image>
   </view>
   <view class="menu-content">
-    <scroll-view class="menu-left">
-      <view class="menu-nav {{navIndex === key ? 'menu-nav-hover' : '' }}"  wx:for="{{navList}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' bindtap="clickNav">{{item.label}}</view>
+    <scroll-view class="menu-left" enable-flex="true">
+      <van-sidebar active-key="{{ activeKey }}" bind:change="changeMenu">
+        <van-sidebar-item title="{{item.label}}" wx:for="{{navList}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' bindtap="clickNav"/>
+      </van-sidebar>
     </scroll-view>
-    <scroll-view class="menu-body">
-      <text>ssadas</text>
+    <scroll-view class="menu-body" enable-flex="true" scroll-y="true">
+      <view wx:for="{{orderList}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' class="menu-body" enable-flex="true" bindscrolltolower="scrollBottom">
+        <van-card
+          class="menu-body-item"
+          :num="item.num"
+          :tag="标签"
+          :price="item.price"
+          desc="描述信息"
+          title="商品标题"
+          thumb="{{ item.imageURL }}"
+        >
+          <view slot="footer">
+            <van-button size="mini">按钮</van-button>
+            <van-button size="mini">按钮</van-button>
+          </view>
+        </van-card>
+      </view>
     </scroll-view>
+  </view>
+  <view class="shopping-body">
+    <view class="shopping-image">
+      <van-icon name="shopping-cart-o" size="80rpx" color="white" info="{{orderNum}}"/>
+    </view>
+    <view class="shopping-price">
+      ￥{{priceTotal}}
+    </view>
+    <view class="shopping-btn">
+      <van-button type="primary" bindtap="selected" block>选好了</van-button>
+    </view>
   </view>
 </view>

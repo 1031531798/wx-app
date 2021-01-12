@@ -8,6 +8,6 @@
     </block>
   </view>
   <view class="usermotto">
-    <button class="usermotto-btn" bindtap="startOrder">{{motto}}</button>
+    <van-button bindtap="startOrder" type="primary" class="usermotto-btn" block>{{motto}}</van-button>
   </view>
 </view>
