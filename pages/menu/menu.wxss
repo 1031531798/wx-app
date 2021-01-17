@@ -6,42 +6,42 @@ page{
 .menu-index{
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 100px auto 100px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 .menu-header{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  height: 150px;
 }
 .header-img{
   width: 100%;
-  height: 200rpx;
+  height: 100%;
 }
 .menu-content{
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-grow: 1;
+  width: 100%;
+  height: 0;
 }
 .menu-body{
   display: flex;
   flex-direction: column;
   height: 100%;
-  flex-grow: 1;
 }
 .menu-left{
   width: 100px;
+  height: 100%;
 }
 .menu-body-item{
   width: 100%;
 }
 .shopping-body{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 60px auto 100px;
   width: 100%;
+  height: 44px;
   background-color: tan;
 }
 .shopping-image{
@@ -52,7 +52,7 @@ page{
   margin-left: 10px;
 }
 .shopping-btn{
-  width: 200rpx;
+  width: 100px;
 }
 .shopping-price{
   display: flex;

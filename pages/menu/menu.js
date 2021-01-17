@@ -46,11 +46,19 @@ Page({
     ],
     orderNum: 12,
     priceTotal: 0,
+    scrollHeight:0,
     navIndex:0,
     orderNull: false
   },
   scrollBottom: function () {
     console.log("到底部了")
+  },
+  setScrollHeight: function () {
+    let screenHeight = wx.getSystemInfoSync().windowHeight - 194;
+    console.log(screenHeight)
+    this.setData({
+      scrollHeight: screenHeight
+    })
   },
   changeMenu: function (event) {
     if (this.data.orderList[event.detail].length > 0) {
@@ -77,14 +85,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
