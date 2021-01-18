@@ -24,15 +24,15 @@ Page({
     ],
     orderList: [
       [
-        {id:0, price:12,num:1,imageURL: '/src/image/hxcf.jfif'},
-        {id:1, price:12,num:1,imageURL: '/src/image/pgcf.jfif'},
-        {id:2, price:12,num:1,imageURL: '/src/image/ng.jpg'},
-        {id:3, price:12,num:1,imageURL: '/src/image/hsng.jfif'}
+        {id:0, price:12,title:'海鲜炒饭',imageURL: '/src/image/hxcf.jfif'},
+        {id:1, price:12,title:'牛肉炒饭',imageURL: '/src/image/pgcf.jfif'},
+        {id:2, price:12,title:'炒年糕',imageURL: '/src/image/ng.jpg'},
+        {id:3, price:12,title:'海鲜炒饭',imageURL: '/src/image/hsng.jfif'}
       ],
       [
-        {id:0, price:12,num:1,imageURL: '/src/image/ggbc.jpg'},
-        {id:1, price:12,num:1,imageURL: '/src/image/tds.jpg'},
-        {id:2, price:12,num:1,imageURL: '/src/image/cbyr.jpg'}
+        {id:4, price:12,title:'干锅包菜',imageURL: '/src/image/ggbc.jpg'},
+        {id:5, price:12,title:'酸辣土豆丝',imageURL: '/src/image/tds.jpg'},
+        {id:6, price:12,title:'葱爆羊肉',imageURL: '/src/image/cbyr.jpg'}
       ],
       [],
       [],
@@ -48,17 +48,11 @@ Page({
     priceTotal: 0,
     scrollHeight:0,
     navIndex:0,
+    shoppingList:[],
     orderNull: false
   },
   scrollBottom: function () {
     console.log("到底部了")
-  },
-  setScrollHeight: function () {
-    let screenHeight = wx.getSystemInfoSync().windowHeight - 194;
-    console.log(screenHeight)
-    this.setData({
-      scrollHeight: screenHeight
-    })
   },
   changeMenu: function (event) {
     if (this.data.orderList[event.detail].length > 0) {

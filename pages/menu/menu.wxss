@@ -36,6 +36,7 @@ page{
 }
 .menu-body-item{
   width: 100%;
+  margin-bottom: 2px;
 }
 .shopping-body{
   display: grid;
@@ -61,4 +62,15 @@ page{
   font-size: 50rpx;
   flex: 1;
   padding-left: 50rpx;
+}
+.order-item-btn-group{
+  text-align: end;
+}
+.order-item-btn{
+  border-radius: 50%;
+  background-color: rgb(251, 226, 81);
+  font-size: 14px;
+  color: white;
+  width: 20px;
+  height: 20px;
 }

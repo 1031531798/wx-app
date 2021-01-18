@@ -10,19 +10,18 @@
       </van-sidebar>
     </scroll-view>
     <scroll-view class="menu-body" enable-flex="true" scroll-y="true">
-      <view wx:for="{{orderList}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' class="menu-body" enable-flex="true" bindscrolltolower="scrollBottom">
+      <view wx:for="{{orderList[navIndex]}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' class="menu-body-item" enable-flex="true" bindscrolltolower="scrollBottom">
         <van-card
-          class="menu-body-item"
-          :num="item.num"
-          :tag="标签"
-          :price="item.price"
+          tag="{{item.tag}}"
+          price="{{item.price}}"
           desc="描述信息"
-          title="商品标题"
+          title="{{item.title}}"
           thumb="{{ item.imageURL }}"
         >
-          <view slot="footer">
-            <van-button size="mini">按钮</van-button>
-            <van-button size="mini">按钮</van-button>
+          <view slot="num" class="order-item-btn-group">
+            <van-icon name="plus" class="order-item-btn" wx:if="{{shoppingList[item.id].num > 0}}"/>
+            <view wx:if="{{shoppingList[item.id].num > 0}}">{{shoppingList[item.id].num}}</view>
+            <van-icon name="plus" class="order-item-btn"/>
           </view>
         </van-card>
       </view>
