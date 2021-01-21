@@ -1,6 +1,5 @@
 // pages/menu.js
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -24,15 +23,15 @@ Page({
     ],
     orderList: [
       [
-        {id:0, price:12,title:'海鲜炒饭',imageURL: '/src/image/hxcf.jfif'},
-        {id:1, price:12,title:'牛肉炒饭',imageURL: '/src/image/pgcf.jfif'},
-        {id:2, price:12,title:'炒年糕',imageURL: '/src/image/ng.jpg'},
-        {id:3, price:12,title:'海鲜炒饭',imageURL: '/src/image/hsng.jfif'}
+        {id:0, price:15,title:'海鲜炒饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
+        {id:1, price:18,title:'牛肉炒饭',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
+        {id:2, price:12,title:'炒年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
+        {id:3, price:15,title:'韩式年糕',imageURL: '/src/image/hsng.jfif',num:0,discount:0}
       ],
       [
-        {id:4, price:12,title:'干锅包菜',imageURL: '/src/image/ggbc.jpg'},
-        {id:5, price:12,title:'酸辣土豆丝',imageURL: '/src/image/tds.jpg'},
-        {id:6, price:12,title:'葱爆羊肉',imageURL: '/src/image/cbyr.jpg'}
+        {id:4, price:21,title:'干锅包菜',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
+        {id:5, price:16,title:'酸辣土豆丝',imageURL: '/src/image/tds.jpg',num:0,discount:0},
+        {id:6, price:38,title:'葱爆羊肉',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
       ],
       [],
       [],
@@ -48,11 +47,51 @@ Page({
     priceTotal: 0,
     scrollHeight:0,
     navIndex:0,
-    shoppingList:[],
-    orderNull: false
+    shoppingList:{length:0},
+    orderNull: false,
+    shoppingListSize: 0
   },
-  scrollBottom: function () {
-    console.log("到底部了")
+  addItem: function (item) {
+    // 通过获取自定义属性id和index id是商品唯一代码用来保存购物车数据 通过list数组更方便的进行数据的获取和保存，index用来获取菜单数据
+    let index = item.target.dataset.index
+    let id = item.target.dataset.shopid
+    let list = this.data.shoppingList
+    let model = this.data.orderList[this.data.navIndex][index]
+    let priceTot = this.data.priceTotal
+    // 添加购物车内容
+    if(list[id] !== undefined){
+      list[id] = model
+      priceTot += list[id].price
+      list[id].num += 1
+      // 计算总价
+      list['length'] += 1
+    }else{
+      model.num += 1
+      priceTot += model.price
+      list[id] = model
+      list['length'] += 1
+      // 计算总价
+    }
+    this.setData({
+      shoppingList:list,
+      shoppingListSize:list.length,
+      priceTotal:priceTot
+    })
+    console.log(this.data.shoppingList)
+  },
+  // 取消购物车内物品
+  delectItem:function(item){
+    let id = item.target.dataset.shopid
+    let list = this.data.shoppingList
+    let priceTot = this.data.priceTotal
+    list[id].num -= 1
+    list['length'] -= 1
+    this.setData({
+      shoppingList:list,
+      shoppingListSize:list.length,
+      priceTotal:priceTot - list[id].price
+    })
+    console.log(priceTot)
   },
   changeMenu: function (event) {
     if (this.data.orderList[event.detail].length > 0) {

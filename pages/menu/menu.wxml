@@ -19,9 +19,10 @@
           thumb="{{ item.imageURL }}"
         >
           <view slot="num" class="order-item-btn-group">
-            <van-icon name="plus" class="order-item-btn" wx:if="{{shoppingList[item.id].num > 0}}"/>
-            <view wx:if="{{shoppingList[item.id].num > 0}}">{{shoppingList[item.id].num}}</view>
-            <van-icon name="plus" class="order-item-btn"/>
+            <van-icon name="minus" class="order-item-btn" wx:if="{{shoppingList[item.id].num > 0}}" bindtap="delectItem" data-index="{{key}}" data-shopid="{{item.id}}"/>
+            <view wx:if="{{shoppingList[item.id].num > 0}}" class="order-item-price">{{shoppingList[item.id].num}}</view>
+            <van-icon name="plus" class="order-item-btn" bindtap="addItem" data-index="{{key}}"
+             data-shopid="{{item.id}}"/>
           </view>
         </van-card>
       </view>
@@ -29,7 +30,7 @@
   </view>
   <view class="shopping-body">
     <view class="shopping-image">
-      <van-icon name="shopping-cart-o" size="80rpx" color="white" info="{{orderNum}}"/>
+      <van-icon name="shopping-cart-o" size="80rpx" color="white" info="{{shoppingListSize}}"/>
     </view>
     <view class="shopping-price">
       ￥{{priceTotal}}
