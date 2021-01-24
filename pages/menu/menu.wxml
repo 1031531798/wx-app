@@ -14,13 +14,13 @@
         <van-card
           tag="{{item.tag}}"
           price="{{item.price}}"
-          desc="描述信息"
+          desc="{{item.desc}}"
           title="{{item.title}}"
           thumb="{{ item.imageURL }}"
         >
           <view slot="num" class="order-item-btn-group">
-            <van-icon name="minus" class="order-item-btn" wx:if="{{shoppingList[item.id].num > 0}}" bindtap="delectItem" data-index="{{key}}" data-shopid="{{item.id}}"/>
-            <view wx:if="{{shoppingList[item.id].num > 0}}" class="order-item-price">{{shoppingList[item.id].num}}</view>
+            <van-icon name="minus" class="order-item-btn-call" wx:if="{{shoppingList['list'][item.id].num > 0}}" bindtap="delectItem" data-index="{{key}}" data-shopid="{{item.id}}"/>
+            <view wx:if="{{shoppingList['list'][item.id].num > 0}}" class="order-item-price">{{shoppingList['list'][item.id].num}}</view>
             <van-icon name="plus" class="order-item-btn" bindtap="addItem" data-index="{{key}}"
              data-shopid="{{item.id}}"/>
           </view>
@@ -28,15 +28,40 @@
       </view>
     </scroll-view>
   </view>
-  <view class="shopping-body">
-    <view class="shopping-image">
-      <van-icon name="shopping-cart-o" size="80rpx" color="white" info="{{shoppingListSize}}"/>
-    </view>
-    <view class="shopping-price">
-      ￥{{priceTotal}}
-    </view>
-    <view class="shopping-btn">
-      <van-button type="primary" bindtap="selected" block>选好了</van-button>
+  <view class="shopping">
+    <van-transition class="shopping-detail" show="{{ shoppingShow }}" name="fade-up" leave-active-class="van-leave-active-class" enter-active-class="van-leave-active-class">
+        <scroll-view class="shopping-body-add" enable-flex="true" scroll-y="true">
+          <view class="shopping-body-add-item" wx:for="{{shoppingList['list']}}" wx:for-index="key" wx:for-item="item" wx:key="key">
+            <van-image width="60" height="60" src="{{item.imageURL}}" fit="scale-down" class="shopping-detail-img"/>
+            <view class="shopping-detail-text">
+              <view>
+                {{item.title}}
+              </view>
+              <view class="item-desc">
+                {{item.desc}}
+              </view>
+             <view class="shopping-detail-footer">
+              <view class="item-price">  
+                ￥{{item.price * item.num}}
+              </view>
+              <view>
+                 <van-stepper value="{{ item.num }}" bind:change="shoppingDetailChange" data-shopid="{{item.id}}" min="0"/>
+              </view>
+             </view>
+            </view>
+          </view>
+        </scroll-view>
+    </van-transition>
+    <view class="shopping-body">
+      <view class="shopping-image" bindtap="showShopping">
+        <van-icon animation="{{addAnimationData}}" name="shopping-cart-o" size="80rpx" color="white" info="{{shoppingListSize}}"/>
+      </view>
+      <view class="shopping-price"  bindtap="showShopping">
+        ￥{{priceTotal}}
+      </view>
+      <view class="shopping-btn">
+        <van-button type="primary" bindtap="selected" block>选好了</van-button>
+      </view>
     </view>
   </view>
 </view>

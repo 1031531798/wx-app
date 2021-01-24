@@ -23,15 +23,15 @@ Page({
     ],
     orderList: [
       [
-        {id:0, price:15,title:'海鲜炒饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
-        {id:1, price:18,title:'牛肉炒饭',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
-        {id:2, price:12,title:'炒年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
-        {id:3, price:15,title:'韩式年糕',imageURL: '/src/image/hsng.jfif',num:0,discount:0}
+        {id:0, price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
+        {id:1, price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
+        {id:2, price:12,title:'炒年糕',desc:'鸡蛋+肉丝+年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
+        {id:3, price:15,title:'韩式年糕',desc:'韩式风味年糕条',imageURL: '/src/image/hsng.jfif',num:0,discount:0}
       ],
       [
-        {id:4, price:21,title:'干锅包菜',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
-        {id:5, price:16,title:'酸辣土豆丝',imageURL: '/src/image/tds.jpg',num:0,discount:0},
-        {id:6, price:38,title:'葱爆羊肉',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
+        {id:4, price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
+        {id:5, price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
+        {id:6, price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
       ],
       [],
       [],
@@ -47,11 +47,14 @@ Page({
     priceTotal: 0,
     scrollHeight:0,
     navIndex:0,
-    shoppingList:{length:0},
+    shoppingList:{list:{},length:0},
     orderNull: false,
-    shoppingListSize: 0
+    shoppingShow:false,
+    shoppingListSize: 0,
+    addAnimationData:{}
   },
   addItem: function (item) {
+    console.log(item)
     // 通过获取自定义属性id和index id是商品唯一代码用来保存购物车数据 通过list数组更方便的进行数据的获取和保存，index用来获取菜单数据
     let index = item.target.dataset.index
     let id = item.target.dataset.shopid
@@ -59,16 +62,16 @@ Page({
     let model = this.data.orderList[this.data.navIndex][index]
     let priceTot = this.data.priceTotal
     // 添加购物车内容
-    if(list[id] !== undefined){
-      list[id] = model
-      priceTot += list[id].price
-      list[id].num += 1
+    if(list['list'][id] !== undefined){
+      list['list'][id] = model
+      priceTot += list['list'][id].price
+      list['list'][id].num += 1
       // 计算总价
       list['length'] += 1
     }else{
       model.num += 1
       priceTot += model.price
-      list[id] = model
+      list['list'][id] = model
       list['length'] += 1
       // 计算总价
     }
@@ -77,6 +80,7 @@ Page({
       shoppingListSize:list.length,
       priceTotal:priceTot
     })
+    this.addAnimation()
     console.log(this.data.shoppingList)
   },
   // 取消购物车内物品
@@ -84,15 +88,19 @@ Page({
     let id = item.target.dataset.shopid
     let list = this.data.shoppingList
     let priceTot = this.data.priceTotal
-    list[id].num -= 1
+    list['list'][id].num -= 1
     list['length'] -= 1
     this.setData({
       shoppingList:list,
       shoppingListSize:list.length,
-      priceTotal:priceTot - list[id].price
+      priceTotal:priceTot - list['list'][id].price
     })
-    console.log(priceTot)
+    if(list['list'][id].num <= 0){
+      delete list['list'][id]
+    }
+    console.log(this.data.shoppingList['list'])
   },
+  // 点击左侧导航栏
   changeMenu: function (event) {
     if (this.data.orderList[event.detail].length > 0) {
       this.setData({
@@ -108,6 +116,52 @@ Page({
     this.setData({
       navIndex:event.detail
    })
+  },
+  // 添加动画
+  addAnimation(){
+    let addItemAnimation = wx.createAnimation({
+      duration: 50,
+      timingFunction: 'linear',
+    })
+    addItemAnimation.scale(1.2).step()
+    addItemAnimation.rotateZ(20).step()
+    addItemAnimation.rotateZ(-20).step()
+    addItemAnimation.scale(1).step()
+    addItemAnimation.rotateZ(0).step()
+    this.setData({
+      addAnimationData : addItemAnimation.export()
+    })
+  },
+  /**
+   * 查看购物车
+   */
+  showShopping:function(){
+    console.log(Object.keys(this.data.shoppingList.list))
+    if(Object.keys(this.data.shoppingList.list).length === 0){
+      this.setData({
+        shoppingShow:false
+      })
+      return
+    }
+    this.setData({
+      shoppingShow:!this.data.shoppingShow
+    })
+    console.log(this.data.shoppingShow)
+  },
+  /**
+   * 在购物车内修改数量
+   * 还未解决：1.item传入后的data数据不同问题
+   * 2.购物车删除后不会同步问题
+   */
+  shoppingDetailChange:function(item){
+    console.log(this.data.shoppingList)
+    let id = item.target.dataset.id
+    let num = this.data.shoppingList['list'][id].num
+    if(item.detail > num){
+      this.addItem(item)
+    }else{
+      this.delectItem(item)
+    }
   },
   clickNav: function (event) {
   },
