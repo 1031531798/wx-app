@@ -2,10 +2,13 @@
 Page({
   /**
    * 页面的初始数据
+   * 未解决问题：1.如何区分不同区块的商品 
+   * 2.如何判断用户在浏览哪个区域的商品
    */
   data: {
     shopData:{
-      shopName:'极岛面栈'
+      shopName:'极岛面栈',
+      shopCurrentGroup:0
     },
     navIndex: 0,
     navList: [
@@ -22,26 +25,13 @@ Page({
       {id: 10,label:'餐具'}
     ],
     orderList: [
-      [
-        {id:0, price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
-        {id:1, price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
-        {id:2, price:12,title:'炒年糕',desc:'鸡蛋+肉丝+年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
-        {id:3, price:15,title:'韩式年糕',desc:'韩式风味年糕条',imageURL: '/src/image/hsng.jfif',num:0,discount:0}
-      ],
-      [
-        {id:4, price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
-        {id:5, price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
-        {id:6, price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
-      ],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      [],
-      []
+      {id:0,groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭', price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
+      {id:1, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
+      {id:2, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:12,title:'炒年糕',desc:'鸡蛋+肉丝+年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
+      {id:3, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:15,title:'韩式年糕',desc:'韩式风味年糕条',imageURL: '/src/image/hsng.jfif',num:0,discount:0},
+      {id:4, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
+      {id:5, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
+      {id:6, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
     ],
     orderNum: 12,
     priceTotal: 0,
@@ -56,11 +46,11 @@ Page({
   addItem: function (item) {
     console.log(item)
     // 通过获取自定义属性id和index id是商品唯一代码用来保存购物车数据 通过list数组更方便的进行数据的获取和保存，index用来获取菜单数据
-    let index = item.target.dataset.index
-    let id = item.target.dataset.shopid
+    let id = item.target.dataset.id
     let list = this.data.shoppingList
-    let model = this.data.orderList[this.data.navIndex][index]
+    let model = this.data.orderList[id]
     let priceTot = this.data.priceTotal
+    console.log(id)
     // 添加购物车内容
     if(list['list'][id] !== undefined){
       list['list'][id] = model
@@ -85,19 +75,20 @@ Page({
   },
   // 取消购物车内物品
   delectItem:function(item){
-    let id = item.target.dataset.shopid
+    let id = item.target.dataset.id
     let list = this.data.shoppingList
     let priceTot = this.data.priceTotal
+    let price = list['list'][id].price
     list['list'][id].num -= 1
     list['length'] -= 1
-    this.setData({
-      shoppingList:list,
-      shoppingListSize:list.length,
-      priceTotal:priceTot - list['list'][id].price
-    })
     if(list['list'][id].num <= 0){
       delete list['list'][id]
     }
+    this.setData({
+      shoppingList:list,
+      shoppingListSize:list.length,
+      priceTotal:priceTot - price
+    })
     console.log(this.data.shoppingList['list'])
   },
   // 点击左侧导航栏
@@ -150,8 +141,6 @@ Page({
   },
   /**
    * 在购物车内修改数量
-   * 还未解决：1.item传入后的data数据不同问题
-   * 2.购物车删除后不会同步问题
    */
   shoppingDetailChange:function(item){
     console.log(this.data.shoppingList)

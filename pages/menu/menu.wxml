@@ -10,7 +10,7 @@
       </van-sidebar>
     </scroll-view>
     <scroll-view class="menu-body" enable-flex="true" scroll-y="true">
-      <view wx:for="{{orderList[navIndex]}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' class="menu-body-item" enable-flex="true" bindscrolltolower="scrollBottom">
+      <view wx:for="{{orderList}}" wx:for-index="key" wx:for-item="item" wx:key="key" data-index = '{{key}}' class="menu-body-item" enable-flex="true" bindscrolltolower="scrollBottom">
         <van-card
           tag="{{item.tag}}"
           price="{{item.price}}"
@@ -19,10 +19,10 @@
           thumb="{{ item.imageURL }}"
         >
           <view slot="num" class="order-item-btn-group">
-            <van-icon name="minus" class="order-item-btn-call" wx:if="{{shoppingList['list'][item.id].num > 0}}" bindtap="delectItem" data-index="{{key}}" data-shopid="{{item.id}}"/>
+            <van-icon name="minus" class="order-item-btn-call" wx:if="{{shoppingList['list'][item.id].num > 0}}" bindtap="delectItem" data-index="{{key}}" data-id="{{item.id}}"/>
             <view wx:if="{{shoppingList['list'][item.id].num > 0}}" class="order-item-price">{{shoppingList['list'][item.id].num}}</view>
             <van-icon name="plus" class="order-item-btn" bindtap="addItem" data-index="{{key}}"
-             data-shopid="{{item.id}}"/>
+             data-id="{{item.id}}"/>
           </view>
         </van-card>
       </view>
@@ -45,7 +45,7 @@
                 ￥{{item.price * item.num}}
               </view>
               <view>
-                 <van-stepper value="{{ item.num }}" bind:change="shoppingDetailChange" data-shopid="{{item.id}}" min="0"/>
+                 <van-stepper value="{{ item.num }}" bind:change="shoppingDetailChange" data-id="{{item.id}}" min="0"/>
               </view>
              </view>
             </view>
