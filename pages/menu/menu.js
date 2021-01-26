@@ -12,32 +12,36 @@ Page({
     },
     navIndex: 0,
     navList: [
-      {id: 0,label:'今日折扣'},
-      {id: 1,label:'热门菜品'},
-      {id: 2,label:'炒饭炒面'},
-      {id: 3,label:'海鲜汤面'},
-      {id: 4,label:'家常小炒'},
-      {id: 5,label:'荤素搭配'},
-      {id: 6,label:'活鱼生鲜'},
-      {id: 7,label:'海鲜贝类'},
-      {id: 8,label:'饮料'},
-      {id: 9,label:'米饭'},
-      {id: 10,label:'餐具'}
+      {id: 0,label:'今日折扣',groupTitle:'美味の饭'},
+      {id: 1,label:'热门菜品',groupTitle:'美味の饭'},
+      {id: 2,label:'炒饭炒面',groupTitle:'美味の饭'},
+      {id: 3,label:'海鲜汤面',groupTitle:'美味の饭'},
+      {id: 4,label:'家常小炒',groupTitle:'家里の味道'},
+      {id: 5,label:'荤素搭配',groupTitle:'美味の饭'},
+      {id: 6,label:'活鱼生鲜',groupTitle:'美味の饭'},
+      {id: 7,label:'海鲜贝类',groupTitle:'美味の饭'},
+      {id: 8,label:'饮料',groupTitle:'美味の饭'},
+      {id: 9,label:'米饭',groupTitle:'美味の饭'},
+      {id: 10,label:'餐具',groupTitle:'美味の饭'}
     ],
     orderList: [
       {id:0,groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭', price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
       {id:1, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
       {id:2, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:12,title:'炒年糕',desc:'鸡蛋+肉丝+年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
       {id:3, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:15,title:'韩式年糕',desc:'韩式风味年糕条',imageURL: '/src/image/hsng.jfif',num:0,discount:0},
-      {id:4, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
-      {id:5, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
-      {id:6, groupId:4,groupName:'家常小炒',groupTitle:'美味の饭',price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
+      {id:4, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
+      {id:5, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
+      {id:6, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
     ],
     orderNum: 12,
     priceTotal: 0,
     scrollHeight:0,
     navIndex:0,
-    shoppingList:{list:{},length:0},
+    shoppingList:{
+      navList:{},
+      list:{},
+      length:0
+    },
     orderNull: false,
     shoppingShow:false,
     shoppingListSize: 0,
@@ -65,10 +69,17 @@ Page({
       list['length'] += 1
       // 计算总价
     }
+    // 添加侧边栏的选中商品
+    if(list['navList'][model.groupId] === undefined){
+      list['navList'][model.groupId] = 1
+    }else if(list['navList'][model.groupId] > 0){
+      list['navList'][model.groupId] += 1
+    }
     this.setData({
       shoppingList:list,
       shoppingListSize:list.length,
-      priceTotal:priceTot
+      priceTotal:priceTot,
+      navList:this.data.navList
     })
     this.addAnimation()
     console.log(this.data.shoppingList)
@@ -80,7 +91,11 @@ Page({
     let priceTot = this.data.priceTotal
     let price = list['list'][id].price
     list['list'][id].num -= 1
+    list['navList'][list['list'][id].groupId] -= 1
     list['length'] -= 1
+    if( list['navList'][list['list'][id].groupId] <= 0){
+      delete  list['navList'][list['list'][id].groupId]
+    }
     if(list['list'][id].num <= 0){
       delete list['list'][id]
     }
