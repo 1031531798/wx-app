@@ -25,11 +25,11 @@ Page({
       {id: 10,label:'餐具',groupTitle:'美味の饭'}
     ],
     orderList: [
-      {id:0,groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭', price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0},
-      {id:1, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0},
+      {id:0,groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭', price:15,title:'海鲜炒饭',desc:'扇贝+鲜虾+酱油米饭',imageURL: '/src/image/hxcf.jfif',num:0,discount:0,groupTop:true},
+      {id:1, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:18,title:'牛肉炒饭',desc:'上好黄牛肉+小青菜+豆芽',imageURL: '/src/image/pgcf.jfif',num:0,discount:0,},
       {id:2, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:12,title:'炒年糕',desc:'鸡蛋+肉丝+年糕',imageURL: '/src/image/ng.jpg',num:0,discount:0},
       {id:3, groupId:2,groupName:'炒饭炒面',groupTitle:'美味の饭',price:15,title:'韩式年糕',desc:'韩式风味年糕条',imageURL: '/src/image/hsng.jfif',num:0,discount:0},
-      {id:4, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0},
+      {id:4, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:21,title:'干锅包菜',desc:'微辣 包菜 酸',imageURL: '/src/image/ggbc.jpg',num:0,discount:0,groupTop:true},
       {id:5, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:16,title:'酸辣土豆丝',desc:'酸+微辣',imageURL: '/src/image/tds.jpg',num:0,discount:0},
       {id:6, groupId:4,groupName:'家常小炒',groupTitle:'家里の味道',price:38,title:'葱爆羊肉',desc:'大葱+羊肉 味道鲜美',imageURL: '/src/image/cbyr.jpg',num:0,discount:0}
     ],

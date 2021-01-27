@@ -38,6 +38,12 @@ page{
   width: 100%;
   margin-bottom: 2px;
 }
+.menu-body-group-title{
+  text-align: center;
+  font-weight: 500;
+  padding: 5px 10px;
+  color: tan;
+}
 .shopping{
   display: flex;
   flex-direction: column;
