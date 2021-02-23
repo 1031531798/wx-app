@@ -67,4 +67,5 @@
       </view>
     </view>
   </view>
+  <view wx:if="{{shoppingShade}}" class="shopping-shade" bindtap="showShopping"></view>
 </view>

@@ -44,6 +44,7 @@ Page({
     },
     orderNull: false,
     shoppingShow:false,
+    shoppingShade: false,
     shoppingListSize: 0,
     addAnimationData:{}
   },
@@ -150,9 +151,9 @@ Page({
       return
     }
     this.setData({
-      shoppingShow:!this.data.shoppingShow
+      shoppingShow:!this.data.shoppingShow,
+      shoppingShade:!this.data.shoppingShow
     })
-    console.log(this.data.shoppingShow)
   },
   /**
    * 在购物车内修改数量
