@@ -1,11 +1,14 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/menu/menu"
+    "pages/menu/menu",
+    "components/Dialog/index",
+    "pages/order-detail/order-detail"
   ],
   "usingComponents": {
-    "van-button": "@vant/weapp/button" ,
+    "van-button": "@vant/weapp/button",
     "van-sidebar": "@vant/weapp/sidebar/index",
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",
     "van-icon": "@vant/weapp/icon/index",
@@ -15,7 +18,11 @@
     "van-transition": "@vant/weapp/transition/index",
     "van-image": "@vant/weapp/image/index",
     "van-panel": "@vant/weapp/panel/index",
-    "van-stepper": "@vant/weapp/stepper/index"
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index"
   },
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,14 @@
+/* pages/order-detail.wxss */
+.order-detail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.order-detail-userinfo{
+  position: relative;
+}
+.order-card{
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}

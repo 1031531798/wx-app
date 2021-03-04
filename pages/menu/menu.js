@@ -10,6 +10,7 @@ Page({
       shopName:'极岛面栈',
       shopCurrentGroup:0
     },
+    tabbarActive: 0,
     navIndex: 0,
     navList: [
       {id: 0,label:'今日折扣',groupTitle:'美味の饭'},
@@ -45,6 +46,7 @@ Page({
     orderNull: false,
     shoppingShow:false,
     shoppingShade: false,
+    sendDialog: false,
     shoppingListSize: 0,
     addAnimationData:{}
   },
@@ -170,8 +172,25 @@ Page({
   },
   clickNav: function (event) {
   },
-  selected: function(){
+  sendSelected: function(){
+    this.setData({
+      sendDialog: true
+    })
     console.log('选好了')
+  },
+  onCloseSend () {
+    this.setData({
+      sendDialog: false
+    })
+    console.log('继续考虑')
+  },
+  sendMenuForm() {
+    wx.navigateTo({
+      url: '../order-detail/order-detail'
+    })
+  },
+  onTabbarChange (event) {
+    this.setData({ tabbarActive: event.detail });
   },
   /**
    * 生命周期函数--监听页面加载

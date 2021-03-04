@@ -1,0 +1,6 @@
+<!--订单详情页-->
+<view class="order-detail">
+  <view class="order-detail-userinfo order-card">
+    
+  </view>
+</view>
