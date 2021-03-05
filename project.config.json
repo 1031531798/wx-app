@@ -15,7 +15,7 @@
     "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
-    "scopeDataCheck": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
@@ -29,6 +29,7 @@
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
     "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": false,
@@ -40,7 +41,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.12.0",
-  "appid": "wx454af5fc6b5f0890",
+  "appid": "wx6c6ea411f8c39617",
   "projectname": "%E9%A4%90%E9%A5%AE%E8%87%AA%E5%8A%A9%E7%82%B9%E9%A4%90",
   "debugOptions": {
     "hidedInDevtools": []

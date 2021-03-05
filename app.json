@@ -4,7 +4,6 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/menu/menu",
-    "components/Dialog/index",
     "pages/order-detail/order-detail"
   ],
   "usingComponents": {

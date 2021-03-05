@@ -17,7 +17,7 @@ Page({
   },
   startOrder:function(){
     wx.navigateTo({
-      url: '../menu/menu'
+      url: '../index/index'
     })
   },
   onLoad: function () {

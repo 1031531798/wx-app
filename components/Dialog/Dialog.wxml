@@ -1,6 +1,0 @@
-<!--pages/components/Dialog/index.wxml-->
-<view class="dialog">
-  <scroll-view class="dialog-body">
-    
-  </scroll-view>
-</view>

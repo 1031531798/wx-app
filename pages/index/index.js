@@ -4,6 +4,28 @@ const app = getApp()
 
 Page({
   data: {
+    swipeSetting: {
+      duration: 500,
+      autoplay: true,
+      interval: 5000,
+      indicatorDots: false,
+      circular: true,
+      activeColor: '#ffc75f'
+    },
+    swipeList: [
+      {src: '/src/image/lb1.jfif'},
+      {src: '/src/image/lb2.jfif'},
+      {src: '/src/image/lb3.jfif'}
+    ],
+    tabbarActive: 0,
+  },
+  onTabbarChange (event) {
+    this.setData({ tabbarActive: event.detail });
+    if (event.detail === 1) {
+      wx.navigateTo({
+        url: '../menu/menu',
+      })
+    }
   },
   //事件处理函数
   bindViewTap: function() {
