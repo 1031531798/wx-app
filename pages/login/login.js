@@ -16,7 +16,7 @@ Page({
     })
   },
   startOrder:function(){
-    wx.navigateTo({
+    wx.switchTab({
       url: '../index/index'
     })
   },

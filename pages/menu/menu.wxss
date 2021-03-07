@@ -136,7 +136,6 @@ page{
   z-index: 99;
   max-height: 80%;
   bottom: 44px;
-  
   display: flex;
 }
 .shopping-body-add{

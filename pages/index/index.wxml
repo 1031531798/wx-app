@@ -15,15 +15,6 @@
       </swiper>
     </view>
     <view>
-
     </view>
-  </view>
-  <view class="page-index-bottom">
-    <van-tabbar active="{{ tabbarActive }}" bind:change="onTabbarChange" active-color="rgb(238, 10, 36)">
-      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-      <van-tabbar-item icon="cart-o" info="5">点单</van-tabbar-item>
-      <van-tabbar-item icon="balance-list-o" dot>订单</van-tabbar-item>
-      <van-tabbar-item icon="user-o">我的</van-tabbar-item>
-    </van-tabbar>
   </view>
 </view>
